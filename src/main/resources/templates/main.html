@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link th:href="@{/css/main.css}" type="text/css" rel="stylesheet">
+    <title>Main</title>
+</head>
+<body>
+<div class="content">
+    <div url="/calculator">
+        <h2>Калькулятор обыкновенный</h2>
+    </div>
+    <div url="/calculator_currency">
+        <h2>Калькулятор валют</h2>
+    </div>
+</div>
+</body>
+<script th:src="@{/js/main.js}"></script>
+</html>

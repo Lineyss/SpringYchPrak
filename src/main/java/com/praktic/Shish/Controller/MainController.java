@@ -8,51 +8,77 @@ import java.util.Objects;
 
 @Controller
 public class MainController {
-    @GetMapping("/greeting")
-    public String greeting(Model model) {
-        model.addAttribute("name", "Hello, World!");
-        return "gretting";
-    }
 
     @GetMapping("/calculator")
-    public String calculator(@RequestParam(name="a", required = false, defaultValue = "0") int a,
+    public String calculatorBase(@RequestParam(name="a", required = false, defaultValue = "0") int a,
                              Model model) {
         return "calculator";
     }
 
-    @PostMapping("/calculation")
-    public String calculation(@RequestParam(name="a") int a,
+    @PostMapping("/calculator/result")
+    public String calculatorBase_result(@RequestParam(name="a") int a,
                               @RequestParam(name="b") int b,
                               @RequestParam(name="action") String action,
                               Model model) {
-        String _action = "";
-        int result = 0;
-        if(Objects.equals(action, "plus"))
+
+        int result = switch (action)
         {
-            _action = "+";
-            result = a + b;
-        }
-        else if(Objects.equals(action, "minus"))
-        {
-            _action = "-";
-            result = a - b;
-        }
-        else if(Objects.equals(action, "umn"))
-        {
-            _action = "*";
-            result = a * b;
-        }
-        else if(Objects.equals(action, "del"))
-        {
-            _action = "/";
-            result = a / b;
-        }
+            case "+" -> a + b;
+            case "-" -> a - b;
+            case "*" -> a * b;
+            case "/" -> a / b;
+            default -> 0;
+        };
 
         model.addAttribute("a", a);
         model.addAttribute("b", b);
-        model.addAttribute("action", _action);
+        model.addAttribute("action", action);
         model.addAttribute("result", result);
 
         return "calculator_result";
+    }
+
+    @GetMapping("/calculator_currency")
+    public String calculator_currency_result(Model model)
+    {
+        return "calculator_currency";
+    }
+
+    @PostMapping("/calculator_currency/result")
+    public String calculator_currency_result(@RequestParam(name="out_currency") String out_currency,
+                                             @RequestParam(name="in_currency") String in_currency,
+                                             @RequestParam(name="out") double out,
+                                             Model model)
+    {
+        double rub_eur = 0.011;
+        double rub_kzt = 5.35;
+        double eur_rub = 90.00;
+        double eur_kzt = 550.00;
+        double kzt_rub = 0.19;
+        double kzt_eur = 0.0018;
+
+        double result = switch (out_currency + "&" + in_currency)
+            {
+                case "rub&eur"-> out * rub_eur;
+                case "rub&kzt"-> out * rub_kzt;
+
+                case "eur&rub"-> out * eur_rub;
+                case "eur&kzt"-> out * eur_kzt;
+
+                case "kzt&eur"-> out * kzt_eur;
+                case "kzt&rub"-> out * kzt_rub;
+
+                default->out;
+            };
+
+        model.addAttribute("result", result);
+
+        return "calculator_currency_result";
+    }
+
+    @GetMapping("/")
+    public String Main(Model model)
+    {
+        return "main";
     }
 }

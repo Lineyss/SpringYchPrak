@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link th:href="@{/css/calculator_currency.css}" rel="stylesheet" type="text/css">
+    <title>Калькулятор валют</title>
+</head>
+<body>
+  <form method="POST" action="/calculator_currency/result">
+    <div>
+      <select name="out_currency">
+        <option value="rub">₽</option>
+        <option value="eur">€</option>
+        <option value="kzt">₸</option>
+      </select>
+      <input placeholder="Валюта" type="number" name="out"/>
+    </div>
+
+    <div>
+      <select name="in_currency">
+        <option value="rub">₽</option>
+        <option value="eur">€</option>
+        <option value="kzt">₸</option>
+      </select>
+    </div>
+    <button type="submit">Расчитать</button>
+  </form>
+
+  <button>
+    <a href="/">
+      Назад
+    </a>
+  </button>
+</body>
+</html>

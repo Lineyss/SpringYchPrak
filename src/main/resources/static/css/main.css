@@ -1,0 +1,38 @@
+*
+{
+    margin: 0;
+    padding: 0;
+}
+
+body, html
+{
+    width: 100%;
+    height: 100%;
+}
+
+.content
+{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    font-family: Arial, sans-serif;
+}
+
+.content > div
+{
+    flex: 1;
+    display: flex;
+    color: black;
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+    background-color: lightgray;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.content > div:hover
+{
+    color: white;
+    background-color: darkslategray;
+}
+

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <link th:href="@{/css/secondLab.css}" type="text/css" rel="stylesheet">
+  <title>People</title>
+</head>
+<body>
+<header>
+  <a href="/">Назад</a>
+  <form method="GET" id="search">
+    <input placeholder="Поиск по имени" name="firstName" />
+    <button>Поиск</button>
+  </form>
+  <ul>
+    <th:block th:each="title: ${categoryes}">
+      <li>
+        <input type="checkbox" name="lastName" class="search"/>
+        <p th:text="|${title}|"/>
+      </li>
+    </th:block>
+  </ul>
+</header>
+<div class="body">
+  <div class="content">
+    <header>
+      <h2>Peoples</h2>
+      <button id="delete">Удалить</button>
+    </header>
+    <div class="peoples">
+      <th:block th:each="people: ${pagination_peoples.getCurrentItems()}">
+        <div class="element">
+          <form method="PUT" th:action="|/people/${people.getID()}|">
+            <input type="checkbox" id="chechboxForDelete"/>
+            <input th:value="|${people.getID()}|" readonly type="number"/>
+            <input th:value="|${people.getFirstName()}|" placeholder="Имя" required type="text" name="firstName"/>
+            <input th:value="|${people.getLastName()}|" placeholder="Фамилия" required type="text" name="lastName"/>
+            <input th:value="|${people.getMiddleName()}|" placeholder="Отчество" required type="text" name="middleName"/>
+            <button type="submit">
+              Обновить
+            </button>
+          </form>
+        </div>
+      </th:block>
+    </div>
+    <div class="pagination">
+      <th:block th:if="${pagination_peoples.getCurrentPage() > 1}">
+        <a th:href="@{/people?(page=${pagination_peoples.getCurrentPage() - 1})}"><</a>
+      </th:block>
+
+      <p th:text="|${pagination_peoples.getCurrentPage()}|"/>
+
+      <th:block th:if="${pagination_peoples.getCurrentPage() < pagination_peoples.getTotalNumberPages()}">
+        <a th:href="@{/people?(page=${pagination_peoples.getCurrentPage() + 1})}">></a>
+      </th:block>
+    </div>
+  </div>
+
+  <div class="content">
+    <header>
+      <h2>Создать</h2>
+    </header>
+    <form class="createPeople" method="POST" action="/people">
+      <p>
+        <input placeholder="Имя" type="text" maxlength="50" required name="firstName">
+      </p>
+      <p>
+        <input placeholder="Фамилия" type="text" maxlength="50" required name="lastName">
+      </p>
+      <p>
+        <input placeholder="Отчество" type="text" maxlength="50" required name="middleName">
+      </p>
+      <button type="submit">
+        Создать
+      </button>
+    </form>
+  </div>
+</div>
+
+<script type="module" th:src="@{/js/people.js}"></script>
+</body>
+</html>

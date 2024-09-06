@@ -1,56 +1,73 @@
 package com.praktic.Shish.Model;
 
+
+import jakarta.persistence.*;
+import jakarta.validation.constraints.Size;
+import org.springframework.boot.context.properties.bind.DefaultValue;
+
+@Entity
 public class Animal {
-    private int ID;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long ID;
+    @Size(min = 3, max = 50, message = "Длина должна быть от 3 до 50 символов")
     private String Name;
+    @Size(min = 3, max = 50, message = "Длина должна быть от 3 до 50 символов")
     private String Type;
-    private boolean IsDeleted = false;
 
-    public Animal(int ID, String Name, String Type, boolean IsDeleted)
+    @Column(columnDefinition = "boolean default false")
+    private boolean IsDeleted;
+
+    public Animal()
+    {
+
+    }
+
+    public Animal(@Size(min = 3, max = 50, message = "Длина должна быть от 3 до 50 символов") String Name,
+                  @Size(min = 3, max = 50, message = "Длина должна быть от 3 до 50 символов") String Type)
+    {
+        this.Name = Name;
+        this.Type = Type;
+    }
+
+    public Animal(Long ID,
+                  @Size(min = 3, max = 50, message = "Длина должна быть от 3 до 50 символов") String Name,
+                  @Size(min = 3, max = 50, message = "Длина должна быть от 3 до 50 символов") String Type)
     {
         this.ID = ID;
         this.Name = Name;
         this.Type = Type;
-        this.IsDeleted = IsDeleted;
     }
 
-    public Animal(int ID, String Name, String Type)
-    {
-        this.ID = ID;
-        this.Name = Name;
-        this.Type = Type;
+    public @Size(min = 3, max = 50, message = "Длина должна быть от 3 до 50 символов") String getName() {
+        return Name;
     }
 
-    public int getID() {
-        return ID;
+    public void setName(@Size(min = 3, max = 50, message = "Длина должна быть от 3 до 50 символов") String name) {
+        Name = name;
     }
 
-    public void setID(int ID) {
-        this.ID = ID;
-    }
-
-    public String getType() {
+    public @Size(min = 3, max = 50, message = "Длина должна быть от 3 до 50 символов") String getType() {
         return Type;
     }
 
-    public void setType(String type) {
+    public void setType(@Size(min = 3, max = 50, message = "Длина должна быть от 3 до 50 символов") String type) {
         Type = type;
+    }
+
+    public Long getID() {
+        return ID;
+    }
+
+    public void setID(Long ID) {
+        this.ID = ID;
     }
 
     public boolean isDeleted() {
         return IsDeleted;
     }
 
-    public void setDeleted(boolean deleted)
-    {
+    public void setDeleted(boolean deleted) {
         IsDeleted = deleted;
-    }
-
-    public String getName() {
-        return Name;
-    }
-
-    public void setName(String name) {
-        Name = name;
     }
 }

@@ -8,14 +8,24 @@
 <body>
 <header>
   <a href="/">Назад</a>
-  <form method="GET" id="search">
-    <input placeholder="Поиск по названию" name="Name" />
-    <button>Поиск</button>
-  </form>
+  <div class="searchContainer">
+    <form method="GET" id="search">
+      <input placeholder="Поиск по ..." name="" id="input_search" />
+      <button>Поиск</button>
+    </form>
+    <ul>
+      <th:block th:each="title: ${fields_for_search}">
+        <li>
+          <input type="checkbox" th:name="|${title}|" class="search"/>
+          <p th:text="|${title}|"/>
+        </li>
+      </th:block>
+    </ul>
+  </div>
   <ul>
     <th:block th:each="title: ${categoryes}">
       <li>
-        <input type="checkbox" name="Type" class="search"/>
+        <input type="checkbox" name="Type" class="sort"/>
         <p th:text="|${title}|"/>
       </li>
     </th:block>

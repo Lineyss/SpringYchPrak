@@ -32,6 +32,11 @@ li > input
     margin: 0 10px;
 }
 
+.searchContainer
+{
+    margin-bottom: 10px;
+}
+
 .body
 {
     width: 100%;

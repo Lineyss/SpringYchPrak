@@ -8,11 +8,6 @@ import jakarta.annotation.Nullable;
 import java.util.HashSet;
 
 public interface IAnimalService {
-    Pagination<Animal> GetAll(int page,  @Nullable String Name, @Nullable String Type);
-    @Nullable
-    Animal GetByID(int ID);
-    boolean Create(AnimalDTO peopleDTO);
-    boolean Update(int ID, AnimalDTO peopleDTO);
-    boolean Delete(int ID);
+    Pagination<Animal> GetAll(int page,  @Nullable String Name, @Nullable String Type, @Nullable Boolean IsDeleted);
     HashSet<String> GetAllCategory();
 }

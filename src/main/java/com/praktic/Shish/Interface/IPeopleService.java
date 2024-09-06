@@ -9,11 +9,6 @@ import java.util.HashSet;
 
 public interface IPeopleService {
 
-    Pagination<People> GetAll(int page, @Nullable String firstName, @Nullable String lastName);
-    @Nullable
-    People GetByID(int ID);
-    boolean Create(PeopleDTO peopleDTO);
-    boolean Update(int ID, PeopleDTO peopleDTO);
-    boolean Delete(int ID);
+    Pagination<People> GetAll(int page, @Nullable String firstName, @Nullable String lastName, @Nullable Boolean IsDeleted);
     HashSet<String> GetAllCategory();
 }

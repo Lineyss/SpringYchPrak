@@ -5,7 +5,9 @@ let formsElementsForDelete = [];
 const buttonDelete = document.getElementById("delete");
 const peoplesForms = document.querySelectorAll(".element > form");
 const deleteCheckboxes = document.querySelectorAll("#chechboxForDelete");
-const categoryes = document.querySelectorAll('.search')
+const categoryes = document.querySelectorAll('.sort')
+const fields_for_search = document.querySelectorAll('.search')
+const input_search = document.getElementById("input_search");
 
 peoplesForms.forEach(element => {
     element.addEventListener("submit", function(event) {
@@ -70,3 +72,20 @@ categoryes.forEach(input => {
         location.href = finalUrl;
     });
 });
+
+fields_for_search.forEach(input => {
+    input.addEventListener("click", function()
+    {
+        const current_input = this;
+        let name = current_input.getAttribute("name");
+        input_search.setAttribute("name", name);
+        input_search.setAttribute("placeholder", `Поиск по '${name}' `)
+
+        fields_for_search.forEach(input => {
+            if(input != current_input)
+            {
+                input.checked = false;
+            }
+        });
+    });
+})

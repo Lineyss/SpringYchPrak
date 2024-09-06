@@ -1,8 +1,9 @@
 package com.praktic.Shish.Service;
 
 import com.praktic.Shish.DTO.AnimalDTO;
+import com.praktic.Shish.Interface.AService;
+import com.praktic.Shish.Interface.IAnimalRepository;
 import com.praktic.Shish.Interface.IAnimalService;
-import com.praktic.Shish.Interface.ICrudRepository;
 import com.praktic.Shish.Model.Animal;
 import com.praktic.Shish.Model.Pagination;
 import jakarta.annotation.Nullable;
@@ -14,17 +15,24 @@ import java.util.HashSet;
 import java.util.stream.Collectors;
 
 @Service
-public class AnimalService implements IAnimalService {
+public class AnimalService
+        extends AService<Animal, AnimalDTO>
+        implements IAnimalService {
 
     @Autowired
-    private ICrudRepository<Animal, AnimalDTO> animalRepository;
+    public AnimalService(IAnimalRepository repository) {
+        super(repository);
+    }
 
     @Override
-    public Pagination<Animal> GetAll(int page, @Nullable String Name, @Nullable String Type) {
-        ArrayList<Animal> animals = animalRepository.GetAll()
-                .stream()
-                .filter(element -> !element.isDeleted())
-                .collect(Collectors.toCollection(ArrayList::new));
+    public Pagination<Animal> GetAll(int page, @Nullable String Name, @Nullable String Type, @Nullable Boolean IsDeleted) {
+        ArrayList<Animal> animals = new ArrayList<>(repository.findAll());
+
+        if(IsDeleted != null) {
+            animals = animals.stream()
+                    .filter(animal -> animal.isDeleted() == IsDeleted)
+                    .collect(Collectors.toCollection(ArrayList::new));
+        }
 
         if (Type != null) {
             animals = animals.stream()
@@ -41,36 +49,50 @@ public class AnimalService implements IAnimalService {
         return new Pagination<Animal>(animals, page);
     }
 
-    @Nullable
     @Override
-    public Animal GetByID(int ID) {
-        return animalRepository.GetByID(ID);
-    }
-
-    @Override
-    public boolean Create(AnimalDTO peopleDTO) {
-        return animalRepository.Create(peopleDTO);
-    }
-
-    @Override
-    public boolean Update(int ID, AnimalDTO peopleDTO) {
-        return animalRepository.Update(ID,peopleDTO);
-    }
-
-    @Override
-    public boolean Delete(int ID) {
-        return animalRepository.Delete(ID);
+    public boolean Delete(Long ID) {
+        Animal findAnimal = GetByID(ID);
+        if(findAnimal != null)
+        {
+            if(findAnimal.isDeleted())
+            {
+                repository.deleteById(ID);
+            }
+            else
+            {
+                findAnimal.setDeleted(true);
+                repository.save(findAnimal);
+            }
+        }
+        return true;
     }
 
     @Override
     public HashSet<String> GetAllCategory() {
         HashSet<String> hashSet = new HashSet<>();
 
-        for(Animal animal : animalRepository.GetAll())
+        for(Animal animal : repository.findAll())
         {
             hashSet.add(animal.getType());
         }
 
         return hashSet;
+    }
+
+    @Override
+    protected Animal ConvertDTOtoEntity(AnimalDTO animalDTO) {
+        return new Animal(animalDTO.getName(), animalDTO.getType());
+    }
+
+    @Override
+    protected Animal UpdateDTOtoEntity(Animal animal, AnimalDTO animalDTO) {
+        animal.setType(animalDTO.getType());
+        animal.setName(animalDTO.getName());
+        return animal;
+    }
+
+    @Override
+    protected Class<Animal> getEntityClass() {
+        return Animal.class;
     }
 }

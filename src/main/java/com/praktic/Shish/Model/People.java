@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
 
 @Entity
+@Table(name="people")
 public class People {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -16,6 +17,14 @@ public class People {
     private String LastName;
     @Column(columnDefinition = "boolean default false")
     private boolean IsDeleted;
+
+    @ManyToOne
+    @JoinColumn(name = "animal_id")
+    private Animal animal;
+
+    @OneToOne
+    @JoinColumn(name = "address_id")
+    private Address address;
 
     public People()
     {
@@ -79,55 +88,20 @@ public class People {
     public void setDeleted(boolean deleted) {
         IsDeleted = deleted;
     }
-/*
-    public People(Long ID, String FirstName, String MiddleName, String LastName)
-    {
-        this.ID = ID;
-        this.FirstName = FirstName;
-        this.LastName = LastName;
-        this.MiddleName = MiddleName;
+
+    public Address getAddress() {
+        return address;
     }
 
-    public People(String FirstName, String MiddleName, String LastName)
-    {
-        this.FirstName = FirstName;
-        this.LastName = LastName;
-        this.MiddleName = MiddleName;
+    public void setAddress(Address address) {
+        this.address = address;
     }
 
-    public Long getID() {
-        return ID;
+    public Animal getAnimal() {
+        return animal;
     }
 
-    public void setID(Long ID) {
-        this.ID = ID;
+    public void setAnimal(Animal animal) {
+        this.animal = animal;
     }
-
-    public String getMiddleName() {
-        return MiddleName;
-    }
-
-    public void setMiddleName(String middleName) {
-        MiddleName = middleName;
-    }
-
-    public String getLastName() {
-        return LastName;
-    }
-
-    public void setLastName(String lastName) {
-        LastName = lastName;
-    }
-
-    public String getFirstName() {
-        return FirstName;
-    }
-
-    public void setFirstName(String firstName) {
-        FirstName = firstName;
-    }
-
-    public boolean isDeleted() {
-        return IsDeleted;
-    }*/
 }

@@ -46,6 +46,8 @@
             <input th:value="|${people.getFirstName()}|" placeholder="Имя" required type="text" name="firstName"/>
             <input th:value="|${people.getLastName()}|" placeholder="Фамилия" required type="text" name="lastName"/>
             <input th:value="|${people.getMiddleName()}|" placeholder="Отчество" required type="text" name="middleName"/>
+            <input th:value="|${people.getAnimal().getName()}|" readonly>
+            <input th:value="|${people.getAddress().getAddress()}|" readonly>
             <button type="submit">
               Обновить
             </button>

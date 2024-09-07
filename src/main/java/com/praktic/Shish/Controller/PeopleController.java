@@ -2,9 +2,8 @@ package com.praktic.Shish.Controller;
 
 import com.praktic.Shish.DTO.PeopleDTO;
 import com.praktic.Shish.Interface.AService;
-import com.praktic.Shish.Interface.IPeopleService;
-import com.praktic.Shish.Model.Animal;
-import com.praktic.Shish.Model.Pagination;
+import com.praktic.Shish.Interface.Service.IPeopleService;
+import com.praktic.Shish.Model.Help.Pagination;
 import com.praktic.Shish.Model.People;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,7 +11,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
-import java.util.Objects;
 
 @Controller
 public class PeopleController {

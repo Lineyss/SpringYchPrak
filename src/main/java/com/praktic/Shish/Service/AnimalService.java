@@ -2,10 +2,10 @@ package com.praktic.Shish.Service;
 
 import com.praktic.Shish.DTO.AnimalDTO;
 import com.praktic.Shish.Interface.AService;
-import com.praktic.Shish.Interface.IAnimalRepository;
-import com.praktic.Shish.Interface.IAnimalService;
+import com.praktic.Shish.Interface.Repository.IAnimalRepository;
+import com.praktic.Shish.Interface.Service.IAnimalService;
 import com.praktic.Shish.Model.Animal;
-import com.praktic.Shish.Model.Pagination;
+import com.praktic.Shish.Model.Help.Pagination;
 import jakarta.annotation.Nullable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

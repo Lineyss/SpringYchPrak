@@ -2,14 +2,12 @@ package com.praktic.Shish.Service;
 
 import com.praktic.Shish.DTO.PeopleDTO;
 import com.praktic.Shish.Interface.AService;
-import com.praktic.Shish.Interface.IPeopleRepository;
-import com.praktic.Shish.Interface.IPeopleService;
-import com.praktic.Shish.Model.Animal;
-import com.praktic.Shish.Model.Pagination;
+import com.praktic.Shish.Interface.Repository.IPeopleRepository;
+import com.praktic.Shish.Interface.Service.IPeopleService;
+import com.praktic.Shish.Model.Help.Pagination;
 import com.praktic.Shish.Model.People;
 import jakarta.annotation.Nullable;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;

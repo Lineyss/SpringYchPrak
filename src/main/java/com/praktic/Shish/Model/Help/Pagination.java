@@ -1,4 +1,4 @@
-package com.praktic.Shish.Model;
+package com.praktic.Shish.Model.Help;
 
 import java.util.ArrayList;
 

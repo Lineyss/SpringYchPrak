@@ -1,7 +1,6 @@
-package com.praktic.Shish.Interface;
+package com.praktic.Shish.Interface.Service;
 
-import com.praktic.Shish.DTO.PeopleDTO;
-import com.praktic.Shish.Model.Pagination;
+import com.praktic.Shish.Model.Help.Pagination;
 import com.praktic.Shish.Model.People;
 import jakarta.annotation.Nullable;
 

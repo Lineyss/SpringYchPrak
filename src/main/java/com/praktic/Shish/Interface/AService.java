@@ -2,9 +2,11 @@ package com.praktic.Shish.Interface;
 
 import jakarta.annotation.Nullable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Service;
 
 import java.lang.reflect.Field;
 
+@Service
 public abstract class AService<Entity, ModelDTO> {
 
     protected final JpaRepository<Entity, Long> repository;

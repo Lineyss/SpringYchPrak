@@ -10,5 +10,4 @@ public class ShishApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(ShishApplication.class, args);
 	}
-
 }
